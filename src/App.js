@@ -4,6 +4,8 @@ import Container from './components/Container/Container';
 import Timer from './components/Timer/Timer';
 import Button from './components/Button/Button';
 
+import './App.css';
+
 function App() {
   const [timer, setTimer] = useState(null);
   const [time, setTime] = useState({timePass: 0, prevTime: 0, });
@@ -34,7 +36,7 @@ function App() {
   return (
     <Container>
       <Timer time={time.timePass}/>
-      <div className='buttons'>
+      <div>
         <Button onClick={start}>start</Button>
         <Button onClick={stop}>stop</Button>
         <Button onClick={reset}>reset</Button>

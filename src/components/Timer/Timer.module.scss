@@ -1,0 +1,7 @@
+@import '../../styles/settings.scss';
+
+.title {
+    font-size: ($base-size * 6.5);
+    text-transform: uppercase;
+    color: $color-light;
+}
