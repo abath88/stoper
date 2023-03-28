@@ -7,7 +7,6 @@ const Timer = ({ time }) => {
     const s = utcDate.getSeconds();
     const m = utcDate.getMinutes();
     const h = utcDate.getHours();
-    console.log(date);
     return (
         <div className={styles.title}>{ h < 10 ? `0${h}` : h }:{ m < 10 ? `0${m}` : m }:{s < 10 ? `0${s}` : s}.{ms < 10 ? `0${ms}` : ms}</div>
     )
