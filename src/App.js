@@ -8,13 +8,13 @@ import './App.css';
 
 function App() {
   const [timer, setTimer] = useState(null);
-  const [time, setTime] = useState({timePass: 0, prevTime: 0, });
+  const [time, setTime] = useState(0);
 
   const start = () => {
-    setTime(prev => {return { timePass: prev.timePass, prevTime: Date.now()}});
+    const startTime = Date.now() - time;
 
     setTimer(setInterval(() => {
-      setTime(prev => {return { timePass: prev.timePass + (Date.now() - prev.prevTime), prevTime: Date.now()}});
+      setTime(Date.now() - startTime);
     }, 1))
   };
 
@@ -23,8 +23,8 @@ function App() {
   };
 
   const reset = () => {
-    setTime({timePass: 0, prevTime: 0}); 
-    
+    stop();
+    setTime(0);
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function App() {
 
   return (
     <Container>
-      <Timer time={time.timePass}/>
+      <Timer time={time}/>
       <div>
         <Button onClick={start}>start</Button>
         <Button onClick={stop}>stop</Button>
