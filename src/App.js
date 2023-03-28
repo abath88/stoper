@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import Container from './components/Container/Container';
 import Timer from './components/Timer/Timer';
@@ -7,31 +7,37 @@ import Button from './components/Button/Button';
 import './App.css';
 
 function App() {
-  const [timer, setTimer] = useState(null);
+  const timerIdRef = useRef(null);
   const [time, setTime] = useState(0);
+
+  const handleClearInterval = () => {
+    if(timerIdRef.current){
+      clearInterval(timerIdRef.current);
+      timerIdRef.current = null;
+    }
+  }
 
   const start = () => {
     const startTime = Date.now() - time;
 
-    setTimer(setInterval(() => {
+    timerIdRef.current = (setInterval(() => {
       setTime(Date.now() - startTime);
-    }, 1))
+    }, 1));
   };
 
   const stop = () => {
-    if(timer) clearInterval(timer); 
+    handleClearInterval();
   };
 
   const reset = () => {
-    stop();
     setTime(0);
   };
 
   useEffect(() => {
     return () => {
-       if(timer) clearInterval(timer);
+       handleClearInterval();
     };
-  }, [timer]);
+  }, []);
 
   return (
     <Container>
